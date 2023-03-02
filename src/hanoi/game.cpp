@@ -25,3 +25,7 @@ bool Game::isWin(){
     else
         return false;
 }
+
+void Game::solve(){
+    
+}
