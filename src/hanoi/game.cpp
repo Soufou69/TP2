@@ -1,31 +1,99 @@
 #include "game.h"
 
 Game::Game(){
-    Game::initGame();
+    Game::initClassicGame();
 }
 
 void Game::createTower(std::string name){
-    Tower* t = new Tower(name);
+    Tower t(name);
     myTowers.push_back(t);
 }
-void Game::initGame(){
-    createTower("Début");
-    createTower("Intermédiaire");
-    createTower("Arrivée");
+void Game::initClassicGame(){
+    Game::initCustomGame(3,4);
+}
 
-    for(int i=0; i<4; i++){
-        myTowers[0]->addDisk(Disk(i+1));
+void Game::initCustomGame(int nbrTowers, int nbrDisks){
+    std::string name="";
+    for(int i=0;i<nbrTowers;i++){
+        if(i==0)
+            name="Début";
+        else if(i==(nbrTowers-1))
+            name="Arrivée";
+        else{
+            name="Intermédiaire";
+            if(nbrTowers!=3)
+                name+=std::to_string(i);
+        }
+        
+        createTower(name);
     }
-    Game::totalDisk = 4;
+    Game::totalDisk = nbrDisks;
+    for(int i=4;i>0;i--){
+        Disk d(i);
+        Game::myTowers[0].addDisk(d);
+    }
+        
 }
 
 bool Game::isWin(){
-    if (myTowers.back()->getDiskCount() == totalDisk)
+    if (myTowers.back().getDiskCount() == totalDisk)
         return true;
     else
         return false;
 }
 
+void Game::moveDisk(int from, int to){
+    if(from!=to && from*to>=0 && from < Game::getNumberTowers() && to < Game::getNumberTowers() && Game::myTowers[from].getDiskCount() >0){
+        std::cout << "Moving top disk of tower " << std::to_string(from) << " to tower " << std::to_string(to) << std::endl;
+        if(Game::myTowers[to].addDisk(Game::myTowers[from].getTopDisk()))
+            Game::myTowers[from].removeTopDisk();
+    }else{
+        std::cout << "Error INPUT: Select a valid and not EMPTY tower !" << std::endl;
+    }
+}
+
 void Game::solve(){
-    
+
+}
+
+void Game::manualPlay(){
+    int from=-1;
+    std::cout << "choose a Tower to move the disk on the top"<< std::endl;
+    while(from==-1){
+        std::cin >> from;
+        if(!std::cin.good() ||from<0 || from>= Game::getNumberTowers()){
+            std::cout<<"Error: please enter a valid integer"<<std::endl;
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            from=-1;
+        }
+            
+    }
+    int to=-1;
+    std::cout << "Choose where to move the disk"<< std::endl;
+    while(to==-1){
+        std::cin >> to;
+        if(!std::cin.good() || to<0 || to>= Game::getNumberTowers() || from==to){
+            std::cout<<"Error: please enter a valid integer and not the same as previously"<<std::endl; 
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            to=-1;
+        }
+            
+    }
+
+    Game::moveDisk(from, to);
+}
+
+int Game::getNumberTowers() const{
+    return static_cast<int>(Game::myTowers.size());
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Game & g){
+    out << "Total number of disks: " << g.totalDisk << std::endl;
+    out << "state of Towers: " << std::endl;
+    for(int i=0;i< g.getNumberTowers();i++)
+        out << g.myTowers[i] << "______________" <<  std::endl;
+    return out;
 }

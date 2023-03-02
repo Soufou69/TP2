@@ -1,9 +1,9 @@
-########Makefile by Soufyan Baiera########
+########Makefile by Soufou########
 
 #Variables
 PROJ= TP2
 CC= g++
-CFLAGS = -Wall -Wextra -std=c++14
+CFLAGS = -Wall -std=c++14
 FLAGS =
 RM = rm -f
 NOM = so

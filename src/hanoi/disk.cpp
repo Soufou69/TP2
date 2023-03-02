@@ -7,3 +7,8 @@ Disk::Disk(int diametre){
 int Disk::getDiametre() const{
     return Disk::diametre;
 }
+
+std::ostream& operator<<(std::ostream& out, const Disk & d){
+    out << d.getDiametre()<<std::endl;
+    return out;
+}

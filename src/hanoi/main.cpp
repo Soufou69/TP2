@@ -2,9 +2,11 @@
 #include "game.h"
 
 int main() {
-	Game* g = new Game();
-	while(!g->isWin()){
-		g->solve();
+	Game g;
+	while(!g.isWin()){
+		std::cout << g;
+		g.manualPlay();
 	}
+	std::cout << "C'est GAGNGE !!"<< std::endl;
 	return 0;
 }
