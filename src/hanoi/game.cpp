@@ -4,6 +4,10 @@ Game::Game(){
     Game::initClassicGame();
 }
 
+Game::Game(int nbrTowers, int nbrDisks){
+    Game::initCustomGame(nbrTowers, nbrDisks);
+}
+
 void Game::createTower(std::string name){
     Tower t(name);
     myTowers.push_back(t);
@@ -13,8 +17,8 @@ void Game::initClassicGame(){
 }
 
 void Game::initCustomGame(int nbrTowers, int nbrDisks){
-    if(nbrTowers==0){
-        throw std::string("ERROR: there must be at least 1 tower !");
+    if(nbrTowers==0 || nbrDisks<0){
+        throw std::string("ERROR: there must be at least 1 tower ! and numbers must be positive");
     }
     std::string name="";
     for(int i=0;i<nbrTowers;i++){
@@ -31,7 +35,7 @@ void Game::initCustomGame(int nbrTowers, int nbrDisks){
         createTower(name);
     }
     Game::totalDisk = nbrDisks;
-    for(int i=4;i>0;i--){
+    for(int i=nbrDisks;i>0;i--){
         Disk d(i);
         Game::myTowers[0].addDisk(d);
     }

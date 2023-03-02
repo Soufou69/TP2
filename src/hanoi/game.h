@@ -9,6 +9,7 @@
 class Game {
     public:
         Game();
+        Game(int nbrTowers, int nbrDisks);
         void solve(int n, int D, int A, int I);
         void initClassicGame();
         void initCustomGame(int nbrTowers, int nbrDisks);
