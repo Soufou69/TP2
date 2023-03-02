@@ -55,8 +55,12 @@ void Game::moveDisk(int from, int to){
     }
 }
 
-void Game::solve(){
-
+void Game::solve(int n, int D, int A, int I){
+    if(n!=0){
+        Game::solve(n-1,D,I,A);
+        Game::moveDisk(D,A);
+        Game::solve(n-1,I,A,D);
+    }
 }
 
 void Game::manualPlay(){
@@ -69,8 +73,7 @@ void Game::manualPlay(){
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             from=-1;
-        }
-            
+        }    
     }
     int to=-1;
     std::cout << "Choose where to move the disk"<< std::endl;

@@ -9,7 +9,7 @@
 class Game {
     public:
         Game();
-        void solve();
+        void solve(int n, int D, int A, int I);
         void initClassicGame();
         void initCustomGame(int nbrTowers, int nbrDisks);
         void createTower(std::string name);
