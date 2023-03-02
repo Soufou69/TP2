@@ -27,8 +27,8 @@ $(PROGS): $(SRCS)
 
 .PHONY : cleanAll
 cleanAll : 
-	$(RM) $(objects)
-	$(RM) ${BIN}/$(PROJ)
+	$(RM) $(BIN_DIR)/*.o
+	$(RM) $(PROGS)
 .PHONY : clean
 clean : 
 	$(RM) $(PROGS)
