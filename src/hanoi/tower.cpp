@@ -6,7 +6,7 @@ Tower::Tower(std::string name) {
 
 bool Tower::addDisk(Disk d){
     if(Tower::getDiskCount()>0 && d.getDiametre()>Tower::getTopDisk().getDiametre()){
-        std::cout << "Disk is too big for this tower !!"<<std::endl;
+        std::cout << "\033[1;31m" << "Disk is too big for this tower !!"<< "\033[0m" << std::endl;
        return false;
     }
         Tower::myDisks.push_back(d);

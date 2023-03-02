@@ -48,7 +48,7 @@ void Game::moveDisk(int from, int to){
         if(Game::myTowers[to].addDisk(Game::myTowers[from].getTopDisk()))
             Game::myTowers[from].removeTopDisk();
     }else{
-        std::cout << "Error INPUT: Select a valid and not EMPTY tower !" << std::endl;
+        std::cout << "\033[1;31m" << "Error INPUT: Select a valid and not EMPTY tower !" << "\033[0m" << std::endl;
     }
 }
 
@@ -62,7 +62,7 @@ void Game::manualPlay(){
     while(from==-1){
         std::cin >> from;
         if(!std::cin.good() ||from<0 || from>= Game::getNumberTowers()){
-            std::cout<<"Error: please enter a valid integer"<<std::endl;
+            std::cout << "\033[1;31m" <<"Error: please enter a valid integer" << "\033[0m" <<std::endl;
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             from=-1;
@@ -74,7 +74,7 @@ void Game::manualPlay(){
     while(to==-1){
         std::cin >> to;
         if(!std::cin.good() || to<0 || to>= Game::getNumberTowers() || from==to){
-            std::cout<<"Error: please enter a valid integer and not the same as previously"<<std::endl; 
+            std::cout << "\033[1;31m" <<"Error: please enter a valid integer and not the same as previously"<< "\033[0m" <<std::endl; 
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             to=-1;
@@ -91,6 +91,7 @@ int Game::getNumberTowers() const{
 
 
 std::ostream& operator<<(std::ostream& out, const Game & g){
+    out << "-------------------------------------------" << std::endl;
     out << "Total number of disks: " << g.totalDisk << std::endl;
     out << "state of Towers: " << std::endl;
     for(int i=0;i< g.getNumberTowers();i++)
