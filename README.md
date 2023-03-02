@@ -3,9 +3,9 @@ TP2 du cours de CPP à CY Tech par S
 Comme il y avait 2 exercices différents, le makefile compilera les 2 exerices (qui se trouvent dans des sous dossier de src) en des programmes séparés
 
 En faisant: make
-vous obtiendrez:
-bin/hanoi
-bin/pair
+  vous obtiendrez:
+  bin/hanoi
+  bin/pair
 
 que vous pouvez lancer
 
