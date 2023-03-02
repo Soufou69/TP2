@@ -37,7 +37,7 @@ void Game::initCustomGame(int nbrTowers, int nbrDisks){
     Game::totalDisk = nbrDisks;
     for(int i=nbrDisks;i>0;i--){
         Disk d(i);
-        Game::myTowers[0].addDisk(d);
+        Game::myTowers[0].pushDisk(d);
     }
         
 }
@@ -52,8 +52,12 @@ bool Game::isWin(){
 void Game::moveDisk(int from, int to){
     if(from!=to && from*to>=0 && from < Game::getNumberTowers() && to < Game::getNumberTowers() && Game::myTowers[from].getDiskCount() >0){
         std::cout << "Moving top disk of tower " << std::to_string(from) << " to tower " << std::to_string(to) << std::endl;
-        if(Game::myTowers[to].addDisk(Game::myTowers[from].getTopDisk()))
-            Game::myTowers[from].removeTopDisk();
+
+        if(Game::myTowers[to].getDiskCount()>0 && Game::myTowers[from].getTopDisk().getDiametre()>Game::myTowers[to].getTopDisk().getDiametre()){
+        std::cout << "\033[1;31m" << "Disk is too big for this tower !!"<< "\033[0m" << std::endl;
+        }else{
+            Game::myTowers[to].pushDisk(Game::myTowers[from].popDisk());
+        }
     }else{
         std::cout << "\033[1;31m" << "Error INPUT: Select a valid and not EMPTY tower !" << "\033[0m" << std::endl;
     }
