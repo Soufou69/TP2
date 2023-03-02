@@ -13,6 +13,9 @@ void Game::initClassicGame(){
 }
 
 void Game::initCustomGame(int nbrTowers, int nbrDisks){
+    if(nbrTowers==0){
+        throw std::string("ERROR: there must be at least 1 tower !");
+    }
     std::string name="";
     for(int i=0;i<nbrTowers;i++){
         if(i==0)
